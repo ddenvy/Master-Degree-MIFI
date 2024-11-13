@@ -65,4 +65,11 @@ public class ChessBoard {
     public boolean castling7() {
         return false;
     }
+
+    public ChessPiece getPiece(int toLine, int toColumn) {
+        if (checkPos(toLine) && checkPos(toColumn)) {
+            return board[toLine][toColumn];
+        }
+        return null;
+    }
 }

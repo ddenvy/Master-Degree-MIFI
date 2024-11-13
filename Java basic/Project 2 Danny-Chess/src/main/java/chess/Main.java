@@ -1,14 +1,9 @@
 package chess;
 
 import chess.board.ChessBoard;
-import chess.pieces.Horse;
-import chess.pieces.Rook;
-import chess.pieces.Bishop;
-import chess.pieces.Queen;
-import chess.pieces.King;
-import chess.pieces.Pawn;
-import java.util.Scanner;
+import chess.pieces.*;
 
+import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -57,12 +52,12 @@ public class Main {
         ChessBoard board = buildBoard();
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-               Чтобы проверить игру надо вводить команды:
-               'exit' - для выхода
-               'replay' - для перезапуска игры
-               'castling0' или 'castling7' - для рокировки по соответствующей линии
-               'move 1 1 2 3' - для передвижения фигуры с позиции 1 1 на 2 3(поле это двумерный массив от 0 до 7)
-               Проверьте могут ли фигуры ходить друг сквозь друга, корректно ли съедают друг друга, можно ли поставить шах и сделать рокировку?""");
+                Чтобы проверить игру надо вводить команды:
+                'exit' - для выхода
+                'replay' - для перезапуска игры
+                'castling0' или 'castling7' - для рокировки по соответствующей линии
+                'move 1 1 2 3' - для передвижения фигуры с позиции 1 1 на 2 3(поле это двумерный массив от 0 до 7)
+                Проверьте могут ли фигуры ходить друг сквозь друга, корректно ли съедают друг друга, можно ли поставить шах и сделать рокировку?""");
         System.out.println();
         board.printBoard();
         while (true) {
