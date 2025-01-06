@@ -32,9 +32,13 @@
 
 Соберите проект с помощью Maven:
 
+bash
+Copy
 mvn clean install
 Запустите приложение:
 
+bash
+Copy
 java -jar target/linkshortener-1.0-SNAPSHOT.jar
 Использование
 После запуска приложения вы увидите меню с возможными действиями:
@@ -56,19 +60,22 @@ java -jar target/linkshortener-1.0-SNAPSHOT.jar
 Пример работы
 Создание короткой ссылки:
 
+Copy
 Введите длинный URL: https://www.example.com
 Введите лимит переходов: 5
 Короткая ссылка: clck.ru/3DZHeG
 Переход по короткой ссылке:
 
+Copy
 Введите короткую ссылку: clck.ru/3DZHeG
 Перенаправление на: https://www.example.com
 Исчерпание лимита переходов:
 
+Copy
 Введите короткую ссылку: clck.ru/3DZHeG
 Лимит переходов исчерпан!
 Структура проекта
-
+Copy
 LinkShortener/
 ├── src/
 │   ├── main/
@@ -91,7 +98,6 @@ LinkShortener/
 ├── target/
 ├── pom.xml
 └── README.md
-
 Тестирование
 Проект включает unit-тесты для проверки основных функций:
 
@@ -102,7 +108,12 @@ LinkShortener/
 Удаление ссылок по истечении времени жизни.
 
 Для запуска тестов выполните:
-mvn test
 
+bash
+Copy
+mvn test
 Автор
-Danil Lobanov
+Ваше имя
+
+Лицензия
+Этот проект распространяется под лицензией MIT. Подробнее см. в файле LICENSE.
