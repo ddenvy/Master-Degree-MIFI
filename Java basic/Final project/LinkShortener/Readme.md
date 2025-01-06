@@ -30,17 +30,15 @@
    git clone https://github.com/ваш-username/ваш-репозиторий.git
    cd ваш-репозиторий
 
-Соберите проект с помощью Maven:
 
-bash
-Copy
-mvn clean install
-Запустите приложение:
+2. **Соберите проект с помощью Maven**:
+   ```bash
+   mvn clean install
+3. Запустите приложение:
+   ```bash
+    java -jar target/linkshortener-1.0-SNAPSHOT.jar
 
-bash
-Copy
-java -jar target/linkshortener-1.0-SNAPSHOT.jar
-Использование
+## Использование
 После запуска приложения вы увидите меню с возможными действиями:
 
 Создать короткую ссылку:
@@ -57,25 +55,25 @@ java -jar target/linkshortener-1.0-SNAPSHOT.jar
 
 Завершение работы приложения.
 
-Пример работы
+**Пример работы**
 Создание короткой ссылки:
 
-Copy
 Введите длинный URL: https://www.example.com
 Введите лимит переходов: 5
 Короткая ссылка: clck.ru/3DZHeG
 Переход по короткой ссылке:
 
-Copy
+
 Введите короткую ссылку: clck.ru/3DZHeG
 Перенаправление на: https://www.example.com
 Исчерпание лимита переходов:
 
-Copy
+
 Введите короткую ссылку: clck.ru/3DZHeG
 Лимит переходов исчерпан!
-Структура проекта
-Copy
+
+## Структура проекта
+   ```bash
 LinkShortener/
 ├── src/
 │   ├── main/
@@ -98,7 +96,9 @@ LinkShortener/
 ├── target/
 ├── pom.xml
 └── README.md
-Тестирование
+      
+
+4.Тестирование
 Проект включает unit-тесты для проверки основных функций:
 
 Уникальность ссылок для разных пользователей.
@@ -112,8 +112,5 @@ LinkShortener/
 bash
 Copy
 mvn test
-Автор
-Ваше имя
 
-Лицензия
-Этот проект распространяется под лицензией MIT. Подробнее см. в файле LICENSE.
+
