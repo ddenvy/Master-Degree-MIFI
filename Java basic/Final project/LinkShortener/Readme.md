@@ -72,34 +72,8 @@
 Введите короткую ссылку: clck.ru/3DZHeG
 Лимит переходов исчерпан!
 
-## Структура проекта
-    ```bash
-LinkShortener/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   ├── org.example/
-│   │   │   │   ├── generator/
-│   │   │   │   │   └── ShortLinkGenerator.java
-│   │   │   │   ├── model/
-│   │   │   │   │   ├── ShortLink.java
-│   │   │   │   │   └── User.java
-│   │   │   │   ├── service/
-│   │   │   │   │   └── LinkShortenerService.java
-│   │   │   │   └── Main.java
-│   │   └── resources/
-│   └── test/
-│       ├── java/
-│       │   └── org.example.tests/
-│       │       └── LinkShortenerServiceTest.java
-│       └── resources/
-├── target/
-├── pom.xml
-└── README.md
-      
----
 
-4.Тестирование
+Тестирование
 Проект включает unit-тесты для проверки основных функций:
 
 Уникальность ссылок для разных пользователей.
