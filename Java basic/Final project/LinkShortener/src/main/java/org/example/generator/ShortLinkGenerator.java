@@ -13,6 +13,6 @@ public class ShortLinkGenerator {
             int index = random.nextInt(CHARACTERS.length());
             shortUrl.append(CHARACTERS.charAt(index));
         }
-        return shortUrl.toString();
+        return "clck.ru/" + shortUrl.toString(); // Добавляем префикс для удобства
     }
 }

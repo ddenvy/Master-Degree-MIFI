@@ -6,6 +6,7 @@ import org.example.model.User;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,57 +22,43 @@ public class LinkShortenerService {
     }
 
     // Создание короткой ссылки
-    public String createShortLink(UUID userId, String originalUrl, int maxClicks) {
+    public String createShortLink(UUID userId, String originalUrl, long expirationTimeInSeconds, int maxClicks) {
         String shortUrl;
         do {
             shortUrl = ShortLinkGenerator.generateShortUrl(); // Генерация короткой ссылки
         } while (shortLinks.containsKey(shortUrl)); // Проверка уникальности
 
         ShortLink shortLink = new ShortLink(originalUrl, shortUrl, maxClicks);
+        shortLink.setExpirationTimeInSeconds(expirationTimeInSeconds);
         shortLinks.put(shortUrl, shortLink);
-
-        // Добавляем ссылку пользователю
-        User user = users.get(userId);
-        if (user != null) {
-            user.addLink(shortUrl, shortLink);
-        }
-
         return shortUrl;
     }
 
-    // Переход по короткой ссылке
-    public String redirect(String shortUrl) {
-        ShortLink shortLink = shortLinks.get(shortUrl);
-        if (shortLink == null) {
-            return "Ссылка не найдена!";
-        }
-
-        // Проверка лимита переходов
-        if (shortLink.getRemainingClicks() <= 0) {
-            return "Лимит переходов исчерпан!";
-        }
-
-        // Уменьшаем количество оставшихся переходов
-        shortLink.setRemainingClicks(shortLink.getRemainingClicks() - 1);
-        return shortLink.getOriginalUrl();
-    }
-
-    // Проверка и удаление "протухших" ссылок
-    public void checkExpiredLinks() {
-        LocalDateTime now = LocalDateTime.now();
-        shortLinks.entrySet().removeIf(entry -> {
-            ShortLink link = entry.getValue();
-            // Удаляем ссылки, которые старше 1 дня
-            return now.isAfter(link.getCreationTime().plusDays(1));
-        });
-    }
-    public boolean isLinkExpired(ShortLink shortLink) {
-
-        return shortLink.getCreationTime().plusSeconds(shortLink.getExpirationTimeInSeconds()).isBefore(LocalDateTime.now());
-
-    }
-    // Получение ShortLink по короткому URL
+    // Получение короткой ссылки
     public ShortLink getShortLink(String shortUrl) {
-        return shortLinks.get(shortUrl);
+        ShortLink shortLink = shortLinks.get(shortUrl);
+        if (shortLink != null && !isLinkExpired(shortLink) && shortLink.getRemainingClicks() > 0) {
+            shortLink.setRemainingClicks(shortLink.getRemainingClicks() - 1);
+            return shortLink;
+        }
+        return null;
+    }
+
+    // Проверка, истекла ли ссылка
+    public boolean isLinkExpired(ShortLink shortLink) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expirationTime = shortLink.getCreationTime().plusSeconds(shortLink.getExpirationTimeInSeconds());
+        return now.isAfter(expirationTime);
+    }
+
+    // Удаление истекших ссылок
+    public void checkExpiredLinks() {
+        Iterator<Map.Entry<String, ShortLink>> iterator = shortLinks.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, ShortLink> entry = iterator.next();
+            if (isLinkExpired(entry.getValue())) {
+                iterator.remove();
+            }
+        }
     }
 }
