@@ -9,8 +9,14 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Класс LinkShortenerServiceTest содержит unit-тесты для проверки функциональности сервиса LinkShortenerService.
+ */
 class LinkShortenerServiceTest {
 
+    /**
+     * Тест проверяет, что одна и та же ссылка, сокращенная разными пользователями, генерирует уникальные короткие ссылки.
+     */
     @Test
     void testUniqueShortLinksForDifferentUsers() {
         LinkShortenerService service = new LinkShortenerService();
@@ -19,19 +25,25 @@ class LinkShortenerServiceTest {
 
         String longUrl = "https://example.com";
 
+        // Создаем короткие ссылки для двух разных пользователей
         String shortUrl1 = service.createShortLink(user1, longUrl, 3600, 5);
         String shortUrl2 = service.createShortLink(user2, longUrl, 3600, 5);
 
+        // Проверяем, что короткие ссылки уникальны
         assertNotEquals(shortUrl1, shortUrl2, "Ссылки должны быть уникальными!");
     }
 
+    /**
+     * Тест проверяет, что ссылка становится недоступной после истечения срока жизни.
+     */
     @Test
     void testLinkExpiration() {
         LinkShortenerService service = new LinkShortenerService();
         UUID user = service.createUser();
 
         String longUrl = "https://example.com";
-        String shortUrl = service.createShortLink(user, longUrl, 1, 5); // Срок жизни: 1 секунда
+        // Создаем ссылку с временем жизни 1 секунда
+        String shortUrl = service.createShortLink(user, longUrl, 1, 5);
 
         // Получаем объект ShortLink
         ShortLink shortLink = service.getShortLink(shortUrl);
@@ -48,13 +60,17 @@ class LinkShortenerServiceTest {
         assertTrue(service.isLinkExpired(shortLink), "Ссылка должна быть просрочена!");
     }
 
+    /**
+     * Тест проверяет, что истекшие ссылки удаляются из хранилища.
+     */
     @Test
     void testExpiredLinkDeletion() {
         LinkShortenerService service = new LinkShortenerService();
         UUID user = service.createUser();
 
         String longUrl = "https://example.com";
-        String shortUrl = service.createShortLink(user, longUrl, 1, 5); // Срок жизни: 1 секунда
+        // Создаем ссылку с временем жизни 1 секунда
+        String shortUrl = service.createShortLink(user, longUrl, 1, 5);
 
         // Получаем объект ShortLink
         ShortLink shortLink = service.getShortLink(shortUrl);
