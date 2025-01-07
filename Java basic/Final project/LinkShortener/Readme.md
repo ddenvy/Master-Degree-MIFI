@@ -27,8 +27,8 @@
 
 1. **Клонируйте репозиторий**:
    ```bash
-   git clone https://github.com/ваш-username/ваш-репозиторий.git
-   cd ваш-репозиторий
+   git clone https://github.com/ddenvy/Master-Degree-MIFI.git
+   cd Master-Degree-MIFI/Java basic/Final project/LinkShortener
 
 
 2. **Соберите проект с помощью Maven**:
