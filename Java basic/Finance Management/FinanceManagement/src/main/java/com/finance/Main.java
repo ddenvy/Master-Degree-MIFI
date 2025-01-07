@@ -7,11 +7,17 @@ import com.finance.model.Wallet;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Класс Main является точкой входа в приложение для управления личными финансами.
+ * Он предоставляет пользователю консольный интерфейс для регистрации, входа,
+ * управления доходами, расходами и бюджетами.
+ */
 public class Main {
     public static void main(String[] args) {
-        FinanceManager manager = new FinanceManager();
-        Scanner scanner = new Scanner(System.in);
+        FinanceManager manager = new FinanceManager(); // Менеджер для управления пользователями и их данными
+        Scanner scanner = new Scanner(System.in); // Сканер для ввода данных от пользователя
 
+        // Основной цикл приложения
         while (true) {
             if (manager.getCurrentUser() == null) {
                 // Меню для неавторизованного пользователя
@@ -20,7 +26,7 @@ public class Main {
                 String choice = scanner.nextLine();
 
                 if (choice.equals("1")) {
-                    // Регистрация
+                    // Регистрация нового пользователя
                     System.out.print("Введите логин: ");
                     String username = scanner.nextLine();
                     System.out.print("Введите пароль: ");
@@ -31,7 +37,7 @@ public class Main {
                         System.out.println("Пользователь уже существует!");
                     }
                 } else if (choice.equals("2")) {
-                    // Вход
+                    // Вход пользователя
                     System.out.print("Введите логин: ");
                     String username = scanner.nextLine();
                     System.out.print("Введите пароль: ");
@@ -42,7 +48,7 @@ public class Main {
                         System.out.println("Неверный логин или пароль!");
                     }
                 } else if (choice.equals("3")) {
-                    // Выход
+                    // Выход из приложения
                     System.out.println("Выход выполнен!");
                     break;
                 } else {
@@ -92,7 +98,7 @@ public class Main {
                         System.out.println(category + ": Бюджет: " + budget + ", Остаток: " + remaining);
                     }
                 } else if (choice.equals("5")) {
-                    // Выход
+                    // Выход из системы
                     manager.logout();
                     System.out.println("Выход выполнен!");
                 } else {
@@ -102,6 +108,6 @@ public class Main {
             }
         }
 
-        scanner.close();
+        scanner.close(); // Закрываем сканер после завершения работы
     }
 }
