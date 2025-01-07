@@ -31,8 +31,8 @@
 
 2. **Склонируйте репозиторий**:
    ```bash
-   git clone https://github.com/ваш-username/FinanceManagement.git
-   cd FinanceManagement
+   git clone https://github.com/ddenvy/Master-Degree-MIFI.git
+   cd Master-Degree-MIFI/Java basic/Finance Management/FinanceManagement
    
 3. **Соберите проект с помощью Maven**:
 
